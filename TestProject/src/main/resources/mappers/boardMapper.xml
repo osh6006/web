@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mappers.boardMapper">
+
+	
+	<!-- 게시물 목록을 만들었을 땐 resutType였습니다. resultType는 데이터를 쿼리를 실행한 뒤 결과가 있을 경우에 사용하며, 반대로 데이터를 넣을 때는 parameterType를 사용합니다. -->
+	
+		<!-- 가입 테이블 insert -->
+   <insert id="sign_write" parameterType="com.hwangss.domain.SignVO" >
+    insert into HS_SIGN_USER(ID, PASSWORD, NAME, EMAIL) values(#{id}, #{password}, #{name}, #{email});
+   </insert>
+   
+    <select id="login_check" resultType="String" >
+ 		select name from HS_SIGN_USER where ID=#{id} and PASSWORD=#{password};
+	</select>
+
+	<!-- 게시물 목록 불러오기-->
+	<select id="list" resultType="com.hwangss.domain.PlayerVO" >
+ 		SELECT id,name FROM SCH_USER_HS;
+	</select>
+	
+	<!-- user 테이블 인서트 -->
+	<insert id="doWrite"  parameterType="com.hwangss.domain.PlayerVO" >
+	  insert into SCH_USER_HS(ID,NAME,TYPE,ADDRESS,post_code,BIRTH)values(#{id}, #{name}, #{type}, #{address}, #{post_code}, #{birth});
+	</insert>
+	
+	<select id="memberSelectAll" resultType="com.hwangss.domain.PlayerVO" >
+		SELECT * 
+		FROM SCH_USER_HS 
+		<where>
+			<if test="ch1=='name'">
+				 AND name LIKE '%'||#{ch2}||'%' 
+			</if>
+			<if test="ch1=='id'">
+				 AND id LIKE '%'||#{ch2}||'%' 
+			</if>
+		</where>
+		ORDER BY CUSTNO DESC
+	</select>
+	
+	
+</mapper>
