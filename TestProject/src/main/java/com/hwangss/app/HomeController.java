@@ -81,6 +81,7 @@ public class HomeController {
 			mav.setViewName("home"); // 실패하면 다시 login페이지로 돌아감
 			mav.addObject("message", "error"); // error message
 			// commit message please
+			// errormessage
 		}
 		return mav;
 	}

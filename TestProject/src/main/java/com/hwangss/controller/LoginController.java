@@ -23,6 +23,8 @@ public class LoginController {
 	public String signUp(Locale locale, Model model) {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
+		//sadfsadfasdfnnggnddkdkdkasdjfladkjfkl
+		
 		return "signUp";
 	}
 }
